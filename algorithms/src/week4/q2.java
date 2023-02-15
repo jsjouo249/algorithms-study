@@ -21,86 +21,36 @@ public class q2 {
     }
 
     public static String decodeString(String s) {
+        Stack<StringBuilder> wordSt = new Stack<>();
+        Stack<Integer> repeatNumSt = new Stack<>();
 
         StringBuilder result = new StringBuilder();
 
-        StringBuilder word = new StringBuilder();
-        StringBuilder repeat = new StringBuilder();
+        int repeatNum = 0;
 
-        Stack<String> wordSt = new Stack<>();
-        Stack<Integer> repeatSt = new Stack<>();
-
-        int index = 1;
-
-        char head = s.charAt(0);
-        if ( Character.isDigit(head) ) {
-            repeat.append(head);
-        }else {
-            StringBuilder firstWord = new StringBuilder();
-            for (int i = 0; i < s.length(); i++) {
-                if ( Character.isAlphabetic(s.charAt(i)) ) {
-                    firstWord.append(s.charAt(i));
-                    index = i + 1;
-                }else {
-                    break;
-                }
-            }
-            result.append(firstWord);
-        }
-
-
-        for (int i = index; i < s.length(); ++i) {
+        for (int i = 0; i < s.length(); ++i) {
             char temp = s.charAt(i);
             //숫자일 때
             if ( Character.isDigit(temp) ) {
-                /**
-                 * 지금 index가 숫자인데, 이전의 index가 숫자가 아니면, 여태 만든 숫자는 반복숫자stack에 넣기
-                 * 2[a3[b]]에서 3인 경우
-                 */
-                if( Character.isAlphabetic(head) ) {
-                    wordSt.push(word.toString());
-                    word.setLength(0);
-                }
-
-                repeat.append(temp);
+                repeatNum = repeatNum * 10 + (temp - '0');
             }else if ('[' == temp) {
-                //[면 반복숫자stack에 넣기
-                repeatSt.push(Integer.parseInt(repeat.toString()));
-
-                repeat.setLength(0);
+                //[면 만들어진 단어가 있을 수 있으니, 단어를 스택에 넣고, 반복숫자도 끝났으니, 숫자도 스택에 넣기
+                wordSt.push(result);
+                result = new StringBuilder();
+                repeatNumSt.push(repeatNum);
+                repeatNum = 0;
             }else if (']' == temp) {
                 // 반복숫자만큼 반복단어 돌리기
-                int repeatNum = repeatSt.pop();
-                if (!word.isEmpty()) {
-                    wordSt.push(word.toString());
-                    word.setLength(0);
+                StringBuilder tempSb = result;
+                result = wordSt.pop();
+                int num = repeatNumSt.pop();
+                for ( int j = 0; j < num; ++j) {
+                    result.append(tempSb);
                 }
-                String repeatWord = wordSt.pop();
-
-                StringBuilder a = new StringBuilder();
-
-                for (int rNum = 0; rNum < repeatNum; rNum++) {
-                    a.append(repeatWord);
-                }
-
-                if (repeatSt.isEmpty()) {
-                    result.append(a);
-                }else {
-                    String lastRepeatWord = wordSt.pop() + a;
-
-                    wordSt.push(lastRepeatWord);
-                }
-
-                word.setLength(0);
             }else {
                 //알파벳이면 반복단어 만들기
-                word.append(temp);
+                result.append(temp);
             }
-            head = temp;
-        }
-
-        if (!word.isEmpty()) {
-            result.append(word);
         }
 
         return result.toString();
