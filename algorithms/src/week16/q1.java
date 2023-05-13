@@ -48,7 +48,6 @@ public class q1 {
                     if (leaf.right != null) tree.add(leaf.right);
                 }
             }
-            System.out.println(sum);
         }
 
         return sum;
