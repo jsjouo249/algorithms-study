@@ -23,7 +23,6 @@ public class q3 {
                 return mid;
             }
         }
-
         return first;
     }
 }

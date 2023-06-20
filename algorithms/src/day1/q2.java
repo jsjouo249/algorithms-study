@@ -20,7 +20,6 @@ public class q2 {
 //                first = mid + 1;
 //            }
 //        }
-//
 //        return first;
 //    }
 }

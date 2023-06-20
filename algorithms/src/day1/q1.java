@@ -3,6 +3,7 @@ package day1;
 public class q1 {
     public static void main(String[] agrs) {
         int[] arr = {5};
+
         System.out.println(search(arr, 5));
     }
 
