@@ -1,25 +1,24 @@
 package leetcode;
 
 //2
-
-class ListNode {
+class ListNode_2 {
     int val;
-    ListNode next;
-    ListNode() {}
-    ListNode(int val) { this.val = val; }
-    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+    ListNode_2 next;
+    ListNode_2() {}
+    ListNode_2(int val) { this.val = val; }
+    ListNode_2(int val, ListNode_2 next) { this.val = val; this.next = next; }
 }
 
 public class addTwoNumbers {
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3, null)));
-        ListNode l2 = new ListNode(5, new ListNode(6, new ListNode(4, null)));
+        ListNode_2 l1 = new ListNode_2(2, new ListNode_2(4, new ListNode_2(3, null)));
+        ListNode_2 l2 = new ListNode_2(5, new ListNode_2(6, new ListNode_2(4, null)));
         addTwoNumbers(l1, l2);
     }
 
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode temp = new ListNode(0);
-        ListNode tail = temp;
+    public static ListNode_2 addTwoNumbers(ListNode_2 l1, ListNode_2 l2) {
+        ListNode_2 temp = new ListNode_2(0);
+        ListNode_2 tail = temp;
 
         int carry = 0;
 
@@ -31,7 +30,7 @@ public class addTwoNumbers {
             int remain = sum % 10;
             carry = sum / 10;
 
-            ListNode newNode = new ListNode(remain);
+            ListNode_2 newNode = new ListNode_2(remain);
             tail.next = newNode;
             tail = tail.next;
 
