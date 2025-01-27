@@ -2,11 +2,6 @@ package leetcode;
 
 //1122 relative sort array
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-
 public class relativeSortArray {
     public static void main(String[] agrs) {
         relativeSortArray(new int[]{2,21,43,38,0,42,33,7,24,13,12,27,12,24,5,23,29,48,30,31}, new int[]{2,42,38,0,43,21});
